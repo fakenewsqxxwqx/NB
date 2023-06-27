@@ -16,8 +16,17 @@ public class usrServiceImpl implements usrService {
         return usrMapper.selectById(id);
     }
 
-    public void register(usr usr) {
-        usrMapper.insert(usr);
+    public String register(usr usr) {
+        QueryWrapper<usr> wrapper= new QueryWrapper<>();
+        wrapper.eq("username", usr.getUsername());
+        usr usr1=usrMapper.selectOne(wrapper);
+        if (usr1==null){
+            usrMapper.insert(usr);
+            return "注册成功";
+        }
+        else {
+            return "用户名已存在";
+        }
     }
 
     public String login(String username, String password) {
