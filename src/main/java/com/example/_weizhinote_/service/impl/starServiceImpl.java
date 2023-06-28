@@ -24,7 +24,7 @@ public class starServiceImpl implements starService {
     public boolean isStar(star star1)
     {
         QueryWrapper<star> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("id",star1.getId());
+        queryWrapper.eq("noteid",star1.getNoteid()).eq("userid",star1.getUserid());
         star star2 = starMapper.selectOne(queryWrapper);
         if(star2!=null)
         {
@@ -47,7 +47,7 @@ public class starServiceImpl implements starService {
     public void deleteStar(star star1)
     {
         QueryWrapper<star> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("id",star1.getId());
+        queryWrapper.eq("noteid",star1.getNoteid()).eq("userid",star1.getUserid());
         star star2 = starMapper.selectOne(queryWrapper);
         if(star2!=null)
         {

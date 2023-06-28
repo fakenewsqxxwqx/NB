@@ -16,7 +16,7 @@ public class favorServiceImpl implements favorService {
     public boolean isFavor(favor favor1)
     {
         QueryWrapper<favor> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("id",favor1.getId());
+        queryWrapper.eq("noteid",favor1.getNoteid()).eq("userid",favor1.getUserid());
         favor favor2 = favorMapper.selectOne(queryWrapper);
         if(favor2!=null)
         {
@@ -39,7 +39,7 @@ public class favorServiceImpl implements favorService {
     public void deleteFavor(favor favor1)
     {
         QueryWrapper<favor> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("id",favor1.getId());
+        queryWrapper.eq("noteid",favor1.getNoteid()).eq("userid",favor1.getUserid());
         favor favor2 = favorMapper.selectOne(queryWrapper);
         if(favor2!=null)
         {

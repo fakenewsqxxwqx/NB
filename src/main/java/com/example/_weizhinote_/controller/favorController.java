@@ -12,13 +12,13 @@ public class favorController {
     private favorService favorService;
 
     @PostMapping("/addFavor")
-    public void addFavor(favor favor1)
+    public void addFavor(@RequestBody favor favor1)
     {
         favorService.addFavor(favor1);
     }
 
     @PutMapping("/favorControl")//update
-    public void favorControl(favor favor1)
+    public void favorControl(@RequestBody favor favor1)
     {
         favorService.favor(favor1);
     }
