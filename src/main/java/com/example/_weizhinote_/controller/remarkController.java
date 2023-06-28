@@ -1,9 +1,13 @@
 package com.example._weizhinote_.controller;
 
+import com.example._weizhinote_.entity.usr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example._weizhinote_.entity.remark;
 import com.example._weizhinote_.service.remarkService;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/remark")
 public class remarkController {
@@ -21,6 +25,16 @@ public class remarkController {
     public void likeRemark(@PathVariable int flag,@PathVariable int id)
     {
         remarkService.updateRemark(id,flag);
+    }
+
+    @GetMapping("/getRemarkByNoteId/{id}")
+    public List<remark> getRemarkByNoteId(@PathVariable int id){
+        return remarkService.getRemarkByNoteId(id);
+    }
+
+    @GetMapping("/getUserByRemarkId/{id}")
+    public usr getUserByRemarkId(@PathVariable int id){
+        return remarkService.getUserByRemarkId(id);
     }
 
 }

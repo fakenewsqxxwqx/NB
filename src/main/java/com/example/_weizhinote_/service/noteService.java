@@ -56,4 +56,6 @@ public interface noteService {
 
     //community
     note getCommunityNote(@PathVariable int id);
+
+    List<Integer> getNoteIdByUserId(String id);
 }

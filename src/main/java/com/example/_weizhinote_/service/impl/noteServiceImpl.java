@@ -276,4 +276,17 @@ public class noteServiceImpl implements noteService {
         return note1;
     }
 
+    @Override
+    public List<Integer> getNoteIdByUserId(String id) {
+        QueryWrapper<note> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("userid",id);
+        List<note> list = noteMapper.selectList(queryWrapper);
+        List<Integer> list1 = new ArrayList<>();
+        for(note note1:list)
+        {
+            list1.add(note1.getId());
+        }
+        return list1;
+    }
+
 }

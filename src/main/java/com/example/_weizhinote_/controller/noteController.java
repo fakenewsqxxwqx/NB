@@ -25,6 +25,11 @@ public class noteController {
         return noteService.getNoteByUserId(id);
     }
 
+    @GetMapping("/getNoteIdByUserId/{id}")
+    public List<Integer> getNoteIdByUserId(@PathVariable String id){
+        return noteService.getNoteIdByUserId(id);
+    }
+
     @GetMapping("/getTagByNoteId/{id}")
     public List<tag> getTagByNoteId(@PathVariable int id){
         return noteService.getTagByNoteId(id);
