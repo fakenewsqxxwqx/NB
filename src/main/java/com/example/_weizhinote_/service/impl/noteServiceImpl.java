@@ -190,6 +190,22 @@ public class noteServiceImpl implements noteService {
     {
         QueryWrapper<note> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id",noteId);
+        //删除tag
+        QueryWrapper<tag> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.eq("noteid",noteId);
+        tagMapper.delete(queryWrapper1);
+
+        //删除picture
+        QueryWrapper<picture> queryWrapper2 = new QueryWrapper<>();
+        queryWrapper2.eq("noteid",noteId);
+        pictureMapper.delete(queryWrapper2);
+
+        //删除layercontent
+        QueryWrapper<layercontent> queryWrapper3 = new QueryWrapper<>();
+        queryWrapper3.eq("noteid",noteId);
+        layercontentMapper.delete(queryWrapper3);
+
+        //删除note
         noteMapper.delete(queryWrapper);
     }
 
