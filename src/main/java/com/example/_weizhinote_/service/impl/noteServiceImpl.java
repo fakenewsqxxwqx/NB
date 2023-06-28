@@ -34,25 +34,24 @@ public class noteServiceImpl implements noteService {
     //添加笔记
     public void addNote(note note1,List<tag> list1,List<picture> list2,List<layercontent> list3)
     {
-        QueryWrapper<note> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("id",note1.getId());
-        note note2 = noteMapper.selectOne(queryWrapper);
-        if(note2==null)
+        note1.setId(null);
+        noteMapper.insert(note1);
+        for (tag tag1:list1)
         {
-            noteMapper.insert(note1);
-            for (tag tag1:list1)
-            {
-                tagMapper.insert(tag1);
-            }
-            for (picture picture1:list2)
-            {
-                pictureMapper.insert(picture1);
-            }
-            for (layercontent layercontent1:list3)
-            {
-                layercontentMapper.insert(layercontent1);
-            }
+            tag1.setId(null);
+            tagMapper.insert(tag1);
         }
+        for (picture picture1:list2)
+        {
+            picture1.setId(null);
+            pictureMapper.insert(picture1);
+        }
+        for (layercontent layercontent1:list3)
+        {
+            layercontent1.setId(null);
+            layercontentMapper.insert(layercontent1);
+        }
+
     }
 
     //修改笔记

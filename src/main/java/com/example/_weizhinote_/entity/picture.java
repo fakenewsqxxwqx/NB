@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class picture {
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
     private int noteid;
     private String pictureurl;
     private Date time;

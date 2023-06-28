@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class favor {
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
     private int noteid;
     private String userid;
     private Date time;

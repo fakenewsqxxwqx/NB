@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class tag {
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
     private String tagname;
     private int noteid;
     private Date time;

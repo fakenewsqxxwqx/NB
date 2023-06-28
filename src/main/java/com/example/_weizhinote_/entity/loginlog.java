@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class loginlog {
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
     private String userid;
     private Date time;
 }
