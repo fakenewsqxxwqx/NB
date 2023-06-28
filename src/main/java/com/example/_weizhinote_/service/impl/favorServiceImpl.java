@@ -60,4 +60,13 @@ public class favorServiceImpl implements favorService {
             addFavor(favor1);
         }
     }
+
+    //笔记点赞数
+    @Override
+    public long favorNum(int NoteId)
+    {
+        QueryWrapper<favor> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("noteId",NoteId);
+        return favorMapper.selectCount(queryWrapper);
+    }
 }

@@ -4,6 +4,8 @@ import com.example._weizhinote_.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example._weizhinote_.service.noteService;
+import com.example._weizhinote_.service.favorService;
+import com.example._weizhinote_.service.starService;
 
 import java.util.List;
 
@@ -12,6 +14,12 @@ import java.util.List;
 public class noteController {
     @Autowired
     private noteService noteService;
+    @Autowired
+    private favorService favorService;
+    @Autowired
+    private starService starService;
+
+    //读取
     @GetMapping("/getNoteByUserId/{id}")
     public List<note> getNoteByUserId(@PathVariable String id){
         return noteService.getNoteByUserId(id);
@@ -32,12 +40,24 @@ public class noteController {
         return noteService.getLayercontentByNoteId(id);
     }
 
+    @GetMapping("/getFavorNum/{id}")
+    public long getFavorNum(@PathVariable int id){
+        return favorService.favorNum(id);
+    }
+
+    @GetMapping("/getStarNum/{id}")
+    public long getStarNum(@PathVariable int id){
+        return starService.starNum(id);
+    }
+
     @GetMapping("/getUsrByUserId/{id}")
     public usr getUsrByUserId(@PathVariable String id){
         return noteService.getUsrByUserId(id);
     }
 
-    //前端需要将id设置为NULL
+
+
+ //添加
     @PostMapping("/addNote")
     public void addNote(@RequestBody note note1){
         noteService.addNote(note1);
@@ -59,7 +79,7 @@ public class noteController {
     }
 
 
-    //修改笔记
+    //修改
     @PutMapping("/updateNote")
     public void updateNote(@RequestBody note note1){
         noteService.updateNote(note1);

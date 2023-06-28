@@ -11,4 +11,7 @@ public interface favorService {
 
     //收藏功能集成
     void favor(favor favor1);
+
+    //笔记点赞数
+    long favorNum(int NoteId);
 }
