@@ -1,6 +1,7 @@
 package com.example._weizhinote_.service;
 
 import com.example._weizhinote_.entity.*;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -49,4 +50,10 @@ public interface noteService {
     void deletePictureById(int pictureId);
 
     void deleteLayercontentById(int layercontentId);
+
+    //community
+    List<Integer> getCommunityNoteList();
+
+    //community
+    note getCommunityNote(@PathVariable int id);
 }

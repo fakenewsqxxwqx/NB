@@ -1,19 +1,30 @@
 package com.example._weizhinote_.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example._weizhinote_.entity.note;
 import com.example._weizhinote_.entity.usr;
 import com.example._weizhinote_.service.usrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example._weizhinote_.mapper.usrMapper;
+import com.example._weizhinote_.mapper.noteMapper;
 @Service
 public class usrServiceImpl implements usrService {
 
     @Autowired
+    private noteMapper noteMapper;
+    @Autowired
     private usrMapper usrMapper;
 
     public usr getUsrById(String id) {
-        return usrMapper.selectById(id);
+        //计算用户笔记数
+        QueryWrapper<note> wrapper= new QueryWrapper<>();
+        wrapper.eq("id", id);
+        long noteNum=noteMapper.selectCount(wrapper);
+
+        usr usr=usrMapper.selectById(id);
+        usr.setNotenum(noteNum);
+        return usr;
     }
 
     public String register(usr usr) {

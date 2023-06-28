@@ -11,9 +11,11 @@ import com.example._weizhinote_.mapper.layercontentMapper;
 import com.example._weizhinote_.mapper.tagMapper;
 import com.example._weizhinote_.mapper.pictureMapper;
 import com.example._weizhinote_.mapper.usrMapper;
-
+import com.example._weizhinote_.mapper.favorMapper;
+import java.util.ArrayList;
 import java.util.List;
-
+import com.example._weizhinote_.mapper.remarkMapper;
+import com.example._weizhinote_.mapper.starMapper;
 @Service
 public class noteServiceImpl implements noteService {
     @Autowired
@@ -26,7 +28,12 @@ public class noteServiceImpl implements noteService {
     private pictureMapper pictureMapper;
     @Autowired
     private usrMapper usrMapper;
-
+    @Autowired
+    private favorMapper favorMapper;
+    @Autowired
+    private remarkMapper remarkMapper;
+    @Autowired
+    private starMapper starMapper;
     /*
     用户笔记界面管理笔记
      */
@@ -232,4 +239,41 @@ public class noteServiceImpl implements noteService {
         queryWrapper.eq("id",layercontentId);
         layercontentMapper.delete(queryWrapper);
     }
+
+    @Override
+    public List<Integer> getCommunityNoteList() {
+        QueryWrapper<note> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("permission",1);
+        List<note> list = noteMapper.selectList(queryWrapper);
+        List<Integer> list1 = new ArrayList<>();
+        for(note note1:list)
+        {
+            list1.add(note1.getId());
+        }
+        return list1;
+    }
+
+    @Override
+    public note getCommunityNote(int id) {
+        QueryWrapper<note> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",id);
+        note note1 = noteMapper.selectOne(queryWrapper);
+        //查询点赞数
+        QueryWrapper<favor> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.eq("noteid",id);
+        long favorNum = favorMapper.selectCount(queryWrapper1);
+        note1.setFavornum(favorNum);
+        //查询评论数
+        QueryWrapper<remark> queryWrapper2 = new QueryWrapper<>();
+        queryWrapper2.eq("noteid",id);
+        long remarkNum = remarkMapper.selectCount(queryWrapper2);
+        note1.setRemarknum(remarkNum);
+        //查询收藏数
+        QueryWrapper<star> queryWrapper3 = new QueryWrapper<>();
+        queryWrapper3.eq("noteid",id);
+        long starNum = starMapper.selectCount(queryWrapper3);
+        note1.setStarnum(starNum);
+        return note1;
+    }
+
 }
