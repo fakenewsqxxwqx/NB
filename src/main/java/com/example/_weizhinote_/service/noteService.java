@@ -18,8 +18,19 @@ public interface noteService {
 
 
     //修改笔记
-    void updateNoteById(note note1, List<tag> list1, List<picture> list2, List<layercontent> list3);
 
+
+    //修改笔记
+    void updateNote(note note1);
+
+    void updateTag(List<tag> list1);
+
+    void updatePicture(List<picture> list2);
+
+    void updateLayercontent(List<layercontent> list3);
+
+
+    //read
     List<note> getNoteByUserId(String userId);
 
     List<tag> getTagByNoteId(String noteId);
@@ -29,4 +40,13 @@ public interface noteService {
     List<layercontent> getLayercontentByNoteId(String noteId);
 
     usr getUsrByUserId(String userId);
+
+    //删除功能
+    void deleteNoteById(String noteId);
+
+    void deleteTagById(String tagId);
+
+    void deletePictureById(String pictureId);
+
+    void deleteLayercontentById(String layercontentId);
 }

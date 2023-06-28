@@ -31,11 +31,13 @@ public class noteServiceImpl implements noteService {
     用户笔记界面管理笔记
      */
 
+    @Override
     public void addNote(note note1){
         note1.setId(null);
         noteMapper.insert(note1);
     }
 
+    @Override
     public void addTag(List<tag> list1){
         for (tag tag1:list1)
         {
@@ -44,6 +46,7 @@ public class noteServiceImpl implements noteService {
         }
     }
 
+    @Override
     public void addPicture(List<picture> list2){
         for (picture picture1:list2)
         {
@@ -52,6 +55,7 @@ public class noteServiceImpl implements noteService {
         }
     }
 
+    @Override
     public void addLayercontent(List<layercontent> list3){
         for (layercontent layercontent1:list3)
         {
@@ -60,6 +64,63 @@ public class noteServiceImpl implements noteService {
         }
     }
     //修改笔记
+    @Override
+    public void updateNote(note note1){
+        QueryWrapper<note> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",note1.getId());
+        note note2 = noteMapper.selectOne(queryWrapper);
+        if(note2!=null)
+        {
+            noteMapper.updateById(note1);
+        }
+    }
+
+    @Override
+    public void updateTag(List<tag> list1)
+    {
+        for(tag tag1:list1)
+        {
+            QueryWrapper<tag> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("id",tag1.getId());
+            tag tag2 = tagMapper.selectOne(queryWrapper);
+            if(tag2!=null)
+            {
+                tagMapper.updateById(tag1);
+            }
+        }
+    }
+
+    @Override
+    public void updatePicture(List<picture> list2)
+    {
+        for(picture picture1:list2)
+        {
+            QueryWrapper<picture> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("id",picture1.getId());
+            picture picture2 = pictureMapper.selectOne(queryWrapper);
+            if(picture2!=null)
+            {
+                pictureMapper.updateById(picture1);
+            }
+        }
+    }
+
+    @Override
+    public void updateLayercontent(List<layercontent> list3)
+    {
+        for(layercontent layercontent1:list3)
+        {
+            QueryWrapper<layercontent> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("id",layercontent1.getId());
+            layercontent layercontent2 = layercontentMapper.selectOne(queryWrapper);
+            if(layercontent2!=null)
+            {
+                layercontentMapper.updateById(layercontent1);
+            }
+        }
+    }
+
+    /*
     @Override
     public void updateNoteById(note note1,List<tag> list1,List<picture> list2,List<layercontent> list3)
     {
@@ -83,6 +144,7 @@ public class noteServiceImpl implements noteService {
             }
         }
     }
+     */
 
     /*
     用户笔记界面获取各种信息
@@ -122,4 +184,36 @@ public class noteServiceImpl implements noteService {
         return usrMapper.selectOne(queryWrapper);
     }
 
+    //删除功能
+    @Override
+    public void deleteNoteById(String noteId)
+    {
+        QueryWrapper<note> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",noteId);
+        noteMapper.delete(queryWrapper);
+    }
+
+    @Override
+    public void deleteTagById(String tagId)
+    {
+        QueryWrapper<tag> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",tagId);
+        tagMapper.delete(queryWrapper);
+    }
+
+    @Override
+    public void deletePictureById(String pictureId)
+    {
+        QueryWrapper<picture> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",pictureId);
+        pictureMapper.delete(queryWrapper);
+    }
+
+    @Override
+    public void deleteLayercontentById(String layercontentId)
+    {
+        QueryWrapper<layercontent> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",layercontentId);
+        layercontentMapper.delete(queryWrapper);
+    }
 }

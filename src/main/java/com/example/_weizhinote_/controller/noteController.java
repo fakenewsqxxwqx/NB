@@ -59,11 +59,45 @@ public class noteController {
     }
 
 
-
-    @PutMapping("/updateNoteById")
-    public void updateNoteById(@RequestParam note note1,@RequestParam List<tag> list1,@RequestParam List<picture> list2,@RequestParam List<layercontent> list3){
-        noteService.updateNoteById(note1,list1,list2,list3);
-
+    //修改笔记
+    @PutMapping("/updateNote")
+    public void updateNote(@RequestBody note note1){
+        noteService.updateNote(note1);
     }
 
+    @PutMapping("/updateTag")
+    public void updateTag(@RequestBody List<tag> list1){
+        noteService.updateTag(list1);
+    }
+
+    @PutMapping("/updatePicture")
+    public void updatePicture(@RequestBody List<picture> list2){
+        noteService.updatePicture(list2);
+    }
+
+    @PutMapping("/updateLayercontent")
+    public void updateLayercontent(@RequestBody List<layercontent> list3){
+        noteService.updateLayercontent(list3);
+    }
+
+    //删除功能
+    @DeleteMapping("/deleteNoteById/{id}")
+    public void deleteNoteById(@PathVariable String id){
+        noteService.deleteNoteById(id);
+    }
+
+    @DeleteMapping("/deleteTagById/{id}")
+    public void deleteTagById(@PathVariable String id){
+        noteService.deleteTagById(id);
+    }
+
+    @DeleteMapping("/deletePictureById/{id}")
+    public void deletePictureById(@PathVariable String id){
+        noteService.deletePictureById(id);
+    }
+
+    @DeleteMapping("/deleteLayercontentById/{id}")
+    public void deleteLayercontentById(@PathVariable String id){
+        noteService.deleteLayercontentById(id);
+    }
 }
