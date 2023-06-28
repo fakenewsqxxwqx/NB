@@ -20,21 +20,21 @@ public class starController {
     private favorService favorService;
 
     @PostMapping("/addStar")
-    public void addStar(star star1)
+    public void addStar(@RequestBody star star1)
     {
         starService.addStar(star1);
     }
 
     @PutMapping("/starControl")//update
-    public void starControl(star star1)
+    public void starControl(@RequestBody star star1)
     {
         starService.star(star1);
     }
 
     //收藏列表，需要获取笔记的整个内容以及点赞，收藏，评论数
     @GetMapping("/starList/{id}")
-    public List<note> getStarList(@PathVariable String userid){
-        return starService.getStarList(userid);
+    public List<note> getStarList(@PathVariable String id){
+        return starService.getStarList(id);
     }
 
 
@@ -44,22 +44,22 @@ public class starController {
     }
 
     @GetMapping("/starList/tag/{id}")
-    public List<tag> getTag(@PathVariable int noteid){
-        return noteService.getTagByNoteId(noteid);
+    public List<tag> getTag(@PathVariable int id){
+        return noteService.getTagByNoteId(id);
     }
 
     @GetMapping("/starList/picture/{id}")
-    public List<picture> getPicture(@PathVariable int noteid){
-        return noteService.getPictureByNoteId(noteid);
+    public List<picture> getPicture(@PathVariable int id){
+        return noteService.getPictureByNoteId(id);
     }
 
     @GetMapping("/starList/starNum/{id}")
-    public long getStarNum(@PathVariable int noteid){
-        return starService.starNum(noteid);
+    public long getStarNum(@PathVariable int id){
+        return starService.starNum(id);
     }
 
     @GetMapping("/starList/favorNum/{id}")
-    public long getFavorNum(@PathVariable int noteid){
-        return favorService.favorNum(noteid);
+    public long getFavorNum(@PathVariable int id){
+        return favorService.favorNum(id);
     }
 }
