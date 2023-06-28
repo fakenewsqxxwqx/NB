@@ -24,7 +24,7 @@ public class favorController {
     }
 
     @GetMapping("/favorNum/{id}")
-    public long getFavorNum(@PathVariable int noteid){
-        return favorService.favorNum(noteid);
+    public long getFavorNum(@PathVariable int id){
+        return favorService.favorNum(id);
     }
 }
