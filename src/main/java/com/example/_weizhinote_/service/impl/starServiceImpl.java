@@ -16,7 +16,7 @@ public class starServiceImpl implements starService {
     public boolean isStar(star star1)
     {
         QueryWrapper<star> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("noteid",star1.getNoteid());
+        queryWrapper.eq("id",star1.getId());
         star star2 = starMapper.selectOne(queryWrapper);
         if(star2!=null)
         {
@@ -31,20 +31,15 @@ public class starServiceImpl implements starService {
     @Override
     public void addStar(star star1)
     {
-        QueryWrapper<star> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("noteid",star1.getNoteid());
-        star star2 = starMapper.selectOne(queryWrapper);
-        if(star2==null)
-        {
-            starMapper.insert(star1);
-        }
+       star1.setId(null);
+       starMapper.insert(star1);
     }
 
     @Override
     public void deleteStar(star star1)
     {
         QueryWrapper<star> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("noteid",star1.getNoteid());
+        queryWrapper.eq("id",star1.getId());
         star star2 = starMapper.selectOne(queryWrapper);
         if(star2!=null)
         {
