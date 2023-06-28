@@ -9,8 +9,8 @@ import java.util.Date;
 @Data
 public class remark {
     @TableId(type = IdType.AUTO)
-    private String id;
-    private String noteid;
+    private int id;
+    private int noteid;
     private String userid;
     private String remarkcontent;
     private Date time;

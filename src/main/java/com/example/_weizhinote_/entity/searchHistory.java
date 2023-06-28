@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class searchHistory {
     @TableId(type = IdType.AUTO)
-    private String id;
+    private int id;
     private String userid;
     private String keyword;
     private String url;

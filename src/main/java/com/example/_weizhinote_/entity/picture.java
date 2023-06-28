@@ -9,8 +9,8 @@ import java.util.Date;
 @Data
 public class picture {
     @TableId(type = IdType.AUTO)
-    private String id;
-    private String noteid;
+    private int id;
+    private int noteid;
     private String pictureurl;
     private Date time;
 }
