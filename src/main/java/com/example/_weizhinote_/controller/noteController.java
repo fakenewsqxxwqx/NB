@@ -37,6 +37,7 @@ public class noteController {
         return noteService.getUsrByUserId(id);
     }
 
+    //前端需要将id设置为NULL
     @PostMapping("/addNoteById")
     public void addNoteById(@RequestParam note note1,@RequestParam List<tag> list1,@RequestParam List<picture> list2,@RequestParam List<layercontent> list3){
         noteService.addNote(note1,list1,list2,list3);
