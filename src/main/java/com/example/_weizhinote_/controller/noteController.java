@@ -18,17 +18,17 @@ public class noteController {
     }
 
     @GetMapping("/getTagByNoteId/{id}")
-    public List<tag> getTagByNoteId(@PathVariable String id){
+    public List<tag> getTagByNoteId(@PathVariable int id){
         return noteService.getTagByNoteId(id);
     }
 
     @GetMapping("/getPictureByNoteId/{id}")
-    public List<picture> getPictureByNoteId(@PathVariable String id){
+    public List<picture> getPictureByNoteId(@PathVariable int id){
         return noteService.getPictureByNoteId(id);
     }
 
     @GetMapping("/getLayercontentByNoteId/{id}")
-    public List<layercontent> getLayercontentByNoteId(@PathVariable String id){
+    public List<layercontent> getLayercontentByNoteId(@PathVariable int id){
         return noteService.getLayercontentByNoteId(id);
     }
 
@@ -82,22 +82,22 @@ public class noteController {
 
     //删除功能
     @DeleteMapping("/deleteNoteById/{id}")
-    public void deleteNoteById(@PathVariable String id){
+    public void deleteNoteById(@PathVariable int id){
         noteService.deleteNoteById(id);
     }
 
     @DeleteMapping("/deleteTagById/{id}")
-    public void deleteTagById(@PathVariable String id){
+    public void deleteTagById(@PathVariable int id){
         noteService.deleteTagById(id);
     }
 
     @DeleteMapping("/deletePictureById/{id}")
-    public void deletePictureById(@PathVariable String id){
+    public void deletePictureById(@PathVariable int id){
         noteService.deletePictureById(id);
     }
 
     @DeleteMapping("/deleteLayercontentById/{id}")
-    public void deleteLayercontentById(@PathVariable String id){
+    public void deleteLayercontentById(@PathVariable int id){
         noteService.deleteLayercontentById(id);
     }
 }

@@ -157,21 +157,21 @@ public class noteServiceImpl implements noteService {
     }
 
     @Override
-    public List<tag> getTagByNoteId(String noteId) {
+    public List<tag> getTagByNoteId(int noteId) {
         QueryWrapper<tag> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("noteid",noteId);
         return tagMapper.selectList(queryWrapper);
     }
 
     @Override
-    public List<picture> getPictureByNoteId(String noteId) {
+    public List<picture> getPictureByNoteId(int noteId) {
         QueryWrapper<picture> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("noteid",noteId);
         return pictureMapper.selectList(queryWrapper);
     }
 
     @Override
-    public List<layercontent> getLayercontentByNoteId(String noteId) {
+    public List<layercontent> getLayercontentByNoteId(int noteId) {
         QueryWrapper<layercontent> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("noteid",noteId);
         return layercontentMapper.selectList(queryWrapper);
@@ -186,7 +186,7 @@ public class noteServiceImpl implements noteService {
 
     //删除功能
     @Override
-    public void deleteNoteById(String noteId)
+    public void deleteNoteById(int noteId)
     {
         QueryWrapper<note> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id",noteId);
@@ -194,7 +194,7 @@ public class noteServiceImpl implements noteService {
     }
 
     @Override
-    public void deleteTagById(String tagId)
+    public void deleteTagById(int tagId)
     {
         QueryWrapper<tag> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id",tagId);
@@ -202,7 +202,7 @@ public class noteServiceImpl implements noteService {
     }
 
     @Override
-    public void deletePictureById(String pictureId)
+    public void deletePictureById(int pictureId)
     {
         QueryWrapper<picture> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id",pictureId);
@@ -210,7 +210,7 @@ public class noteServiceImpl implements noteService {
     }
 
     @Override
-    public void deleteLayercontentById(String layercontentId)
+    public void deleteLayercontentById(int layercontentId)
     {
         QueryWrapper<layercontent> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id",layercontentId);

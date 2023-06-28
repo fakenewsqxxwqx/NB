@@ -33,20 +33,20 @@ public interface noteService {
     //read
     List<note> getNoteByUserId(String userId);
 
-    List<tag> getTagByNoteId(String noteId);
+    List<tag> getTagByNoteId(int noteId);
 
-    List<picture> getPictureByNoteId(String noteId);
+    List<picture> getPictureByNoteId(int noteId);
 
-    List<layercontent> getLayercontentByNoteId(String noteId);
+    List<layercontent> getLayercontentByNoteId(int noteId);
 
     usr getUsrByUserId(String userId);
 
     //删除功能
-    void deleteNoteById(String noteId);
+    void deleteNoteById(int noteId);
 
-    void deleteTagById(String tagId);
+    void deleteTagById(int tagId);
 
-    void deletePictureById(String pictureId);
+    void deletePictureById(int pictureId);
 
-    void deleteLayercontentById(String layercontentId);
+    void deleteLayercontentById(int layercontentId);
 }
