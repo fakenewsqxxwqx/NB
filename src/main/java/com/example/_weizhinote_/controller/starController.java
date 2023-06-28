@@ -39,8 +39,8 @@ public class starController {
 
 
     @GetMapping("/starList/content/{id}")
-    public List<layercontent> getContent(@PathVariable int noteid){
-        return noteService.getLayercontentByNoteId(noteid);
+    public List<layercontent> getContent(@PathVariable int id){
+        return noteService.getLayercontentByNoteId(id);
     }
 
     @GetMapping("/starList/tag/{id}")
