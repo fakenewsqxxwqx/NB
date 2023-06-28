@@ -38,13 +38,32 @@ public class noteController {
     }
 
     //前端需要将id设置为NULL
-    @PostMapping("/addNoteById")
-    public void addNoteById(@RequestParam note note1,@RequestParam List<tag> list1,@RequestParam List<picture> list2,@RequestParam List<layercontent> list3){
-        noteService.addNote(note1,list1,list2,list3);
+    @PostMapping("/addNote")
+    public void addNote(@RequestBody note note1){
+        noteService.addNote(note1);
     }
+
+    @PostMapping("/addTag")
+    public void addTag(@RequestBody List<tag> list1){
+        noteService.addTag(list1);
+    }
+
+    @PostMapping("/addPicture")
+    public void addPicture(@RequestBody List<picture> list2){
+        noteService.addPicture(list2);
+    }
+
+    @PostMapping("/addLayercontent")
+    public void addLayercontent(@RequestBody List<layercontent> list3){
+        noteService.addLayercontent(list3);
+    }
+
+
 
     @PutMapping("/updateNoteById")
     public void updateNoteById(@RequestParam note note1,@RequestParam List<tag> list1,@RequestParam List<picture> list2,@RequestParam List<layercontent> list3){
         noteService.updateNoteById(note1,list1,list2,list3);
+
     }
+
 }

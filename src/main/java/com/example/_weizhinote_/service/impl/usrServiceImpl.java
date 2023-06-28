@@ -45,6 +45,7 @@ public class usrServiceImpl implements usrService {
     }
 
     public void update(usr usr) {
+        System.out.println("updateService");
         QueryWrapper<usr> wrapper= new QueryWrapper<>();
         wrapper.eq("id", usr.getId());
         usrMapper.update(usr, wrapper);

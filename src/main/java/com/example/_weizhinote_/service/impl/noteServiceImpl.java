@@ -30,30 +30,35 @@ public class noteServiceImpl implements noteService {
     /*
     用户笔记界面管理笔记
      */
-    @Override
-    //添加笔记
-    public void addNote(note note1,List<tag> list1,List<picture> list2,List<layercontent> list3)
-    {
+
+    public void addNote(note note1){
         note1.setId(null);
         noteMapper.insert(note1);
+    }
+
+    public void addTag(List<tag> list1){
         for (tag tag1:list1)
         {
             tag1.setId(null);
             tagMapper.insert(tag1);
         }
+    }
+
+    public void addPicture(List<picture> list2){
         for (picture picture1:list2)
         {
             picture1.setId(null);
             pictureMapper.insert(picture1);
         }
+    }
+
+    public void addLayercontent(List<layercontent> list3){
         for (layercontent layercontent1:list3)
         {
             layercontent1.setId(null);
             layercontentMapper.insert(layercontent1);
         }
-
     }
-
     //修改笔记
     @Override
     public void updateNoteById(note note1,List<tag> list1,List<picture> list2,List<layercontent> list3)

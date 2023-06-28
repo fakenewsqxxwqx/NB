@@ -8,7 +8,14 @@ public interface noteService {
     /*
     用户笔记界面管理笔记
      */
-    void addNote(note note1, List<tag> list1, List<picture> list2, List<layercontent> list3);
+    void addNote(note note1);
+
+    void addTag(List<tag> list1);
+
+    void addPicture(List<picture> list2);
+
+    void addLayercontent(List<layercontent> list3);
+
 
     //修改笔记
     void updateNoteById(note note1, List<tag> list1, List<picture> list2, List<layercontent> list3);

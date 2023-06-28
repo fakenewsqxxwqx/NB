@@ -17,5 +17,5 @@ public class note {
     private long starnum;
     private long favornum;
     private long remarknum;
-    private byte permisson;
+    private byte permission;
 }

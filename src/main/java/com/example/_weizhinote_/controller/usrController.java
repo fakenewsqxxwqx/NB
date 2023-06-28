@@ -27,7 +27,8 @@ public class usrController {
     }
 
     @PutMapping("/update")
-    public void update(@RequestParam("usr") usr usr){
+    public void update(@RequestBody usr usr){
+        System.out.println("updateController");
         usrService.update(usr);
     }
 }
