@@ -1,13 +1,21 @@
 package com.example._weizhinote_.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example._weizhinote_.entity.loginlog;
 import com.example._weizhinote_.entity.note;
 import com.example._weizhinote_.entity.usr;
+import com.example._weizhinote_.mapper.loginlogMapper;
 import com.example._weizhinote_.service.usrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example._weizhinote_.mapper.usrMapper;
 import com.example._weizhinote_.mapper.noteMapper;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 @Service
 public class usrServiceImpl implements usrService {
 
@@ -15,6 +23,8 @@ public class usrServiceImpl implements usrService {
     private noteMapper noteMapper;
     @Autowired
     private usrMapper usrMapper;
+    @Autowired
+    private loginlogMapper loginlogMapper;
 
     public usr getUsrById(String id) {
         //计算用户笔记数
@@ -24,6 +34,16 @@ public class usrServiceImpl implements usrService {
 
         usr usr=usrMapper.selectById(id);
         usr.setNotenum(noteNum);
+
+        //纪录登录日志
+        loginlog loginlog=new loginlog();
+        loginlog.setUserid(usr.getId());
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        Date date = Date.from(instant);
+        loginlog.setTime(date);
+        loginlogMapper.insert(loginlog);
+
         return usr;
     }
 
@@ -48,6 +68,15 @@ public class usrServiceImpl implements usrService {
             return "用户不存在";
         }
         else if (usr.getPassw().equals(password)){
+            //登录成功，记录登录日志
+            loginlog loginlog=new loginlog();
+            loginlog.setUserid(usr.getId());
+            LocalDateTime localDateTime = LocalDateTime.now();
+            Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+            Date date = Date.from(instant);
+            loginlog.setTime(date);
+            loginlogMapper.insert(loginlog);
+
             return "登录成功";
         }
         else {

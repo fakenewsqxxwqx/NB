@@ -21,6 +21,7 @@ public class remarkController {
         remarkService.addRemark(remark1);
     }
 
+    //flag=1表示点赞，flag=0表示取消点赞
     @PutMapping ("/updateRemark/{id}/{flag}")
     public void likeRemark(@PathVariable int flag,@PathVariable int id)
     {
