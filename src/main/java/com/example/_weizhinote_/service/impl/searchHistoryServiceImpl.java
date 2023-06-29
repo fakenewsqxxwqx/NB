@@ -27,4 +27,6 @@ public class searchHistoryServiceImpl implements searchHistoryService {
         queryWrapper.eq("id", id);
         searchHistoryMapper.delete(queryWrapper);
     }
+
+
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example._weizhinote_.mapper.favorMapper;
 
+import java.util.List;
+
 @Service
 public class favorServiceImpl implements favorService {
     @Autowired

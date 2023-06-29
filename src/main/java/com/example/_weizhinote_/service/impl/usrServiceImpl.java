@@ -49,6 +49,9 @@ public class usrServiceImpl implements usrService {
         usr usr1=usrMapper.selectOne(wrapper);
         if (usr1==null){
             usr.setPassw(passwordEncoder.encode(usr.getPassw()));
+            usr.setNotenum(0);
+            usr.setVisitnum(0);
+            if(usr.getRole()==null) usr.setRole("user");
             usr.setTime(currentTime.getCurrentTime());
             usrMapper.insert(usr);
             return "注册成功";
@@ -86,4 +89,5 @@ public class usrServiceImpl implements usrService {
         usr.setTime(currentTime.getCurrentTime());
         usrMapper.update(usr, wrapper);
     }
+
 }

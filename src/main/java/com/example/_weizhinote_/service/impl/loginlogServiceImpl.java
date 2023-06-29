@@ -25,4 +25,6 @@ public class loginlogServiceImpl implements loginlogService {
         wrapper.eq("userid", id);
         return loginlogMapper.selectList(wrapper);
     }
+
+
 }

@@ -96,4 +96,6 @@ public class starServiceImpl implements starService {
         List<note> noteList = noteMapper.selectList(queryWrapper1);
         return noteList;
     }
+
+
 }

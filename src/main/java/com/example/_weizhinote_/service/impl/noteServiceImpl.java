@@ -43,6 +43,9 @@ public class noteServiceImpl implements noteService {
     public void addNote(note note1){
         note1.setId(null);
         note1.setTime(currentTime.getCurrentTime());
+        note1.setStarnum(0);
+        note1.setFavornum(0);
+        note1.setRemarknum(0);
         noteMapper.insert(note1);
     }
 
@@ -297,5 +300,7 @@ public class noteServiceImpl implements noteService {
         }
         return list1;
     }
+
+
 
 }

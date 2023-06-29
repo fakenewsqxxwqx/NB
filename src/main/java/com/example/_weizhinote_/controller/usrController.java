@@ -21,8 +21,8 @@ public class usrController {
         usrService.register(usr);
     }
 
-    @GetMapping("/userlogin")
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password){
+    @GetMapping("/userlogin/{username}/{password}")
+    public String login(@PathVariable String username, @PathVariable String password){
         return usrService.login(username, password);
     }
 

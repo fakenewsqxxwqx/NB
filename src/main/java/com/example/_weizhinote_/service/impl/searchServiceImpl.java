@@ -74,18 +74,30 @@ public class searchServiceImpl implements searchService {
     @Override
     public List<Integer> searchByKeyWord(String keyword, String userId) {
         //存浏览纪录
-        searchHistory searchhistory=new searchHistory();
+        searchHistory searchhistory = new searchHistory();
         searchhistory.setId(null);
         searchhistory.setKeyword(keyword);
-        searchhistory.setUrl("/search/searchByKeyWord/"+keyword);
+        searchhistory.setUrl("/search/searchByKeyWord/" + keyword);
         searchhistory.setUserid(userId);
         searchhistory.setTime(currentTime.getCurrentTime());
         searchHistoryMapper.insert(searchhistory);
 
-        List<Integer> noteIdList1=searchByTitle(keyword,userId);
-        List<Integer> noteIdList2=searchByContent(keyword,userId);
-        noteIdList1.addAll(noteIdList2);
-
+        List<Integer> noteIdList1 = searchByTitle(keyword, userId);
+        List<Integer> noteIdList2 = searchByContent(keyword, userId);
+        if (noteIdList1 == null) {
+            System.out.println("noteIdList1为空");
+        }
+        if (noteIdList2 == null) {
+            System.out.println("noteIdList1为空");
+        }
+        //合并相同笔记id
+        for (int i = 0; i < noteIdList2.size(); i++) {
+            if (!noteIdList1.contains(noteIdList2.get(i))) {
+                noteIdList1.add(noteIdList2.get(i));
+            }
+        }
         return noteIdList1;
     }
+
+
 }
