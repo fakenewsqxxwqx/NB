@@ -1,21 +1,19 @@
 package com.example._weizhinote_.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example._weizhinote_.entity.layercontent;
+import com.example._weizhinote_.entity.note;
 import com.example._weizhinote_.entity.searchHistory;
 import com.example._weizhinote_.entity.tag;
 import com.example._weizhinote_.mapper.searchHistoryMapper;
 import com.example._weizhinote_.service.searchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import com.example._weizhinote_.mapper.tagMapper;
 import com.example._weizhinote_.utils.currentTime;
-
+import com.example._weizhinote_.mapper.noteMapper;
+import com.example._weizhinote_.mapper.layercontentMapper;
 @Service
 public class searchServiceImpl implements searchService {
 
@@ -23,7 +21,13 @@ public class searchServiceImpl implements searchService {
     private tagMapper tagMapper;
 
     @Autowired
+    private noteMapper noteMapper;
+
+    @Autowired
     private searchHistoryMapper searchHistoryMapper;
+
+    @Autowired
+    private layercontentMapper layercontentMapper;
 
     @Override
     public List<Integer> searchByTag(String tagname,String userId) {
@@ -46,5 +50,42 @@ public class searchServiceImpl implements searchService {
 
 
         return noteIdList;
+    }
+
+    //根据标题模糊查询
+    public List<Integer> searchByTitle(String keyword,String userId) {
+        QueryWrapper<note> wrapper= new QueryWrapper<>();
+        wrapper.like("notetitle", keyword);
+        List<note> noteList=noteMapper.selectList(wrapper);
+        List<Integer> noteIdList=noteList.stream().map(note::getId).toList();
+        return noteIdList;
+    }
+
+    //根据内容模糊查询
+    public List<Integer> searchByContent(String keyword,String userId) {
+        QueryWrapper<layercontent> wrapper= new QueryWrapper<>();
+        wrapper.like("content", keyword);
+        List<layercontent> contentList=layercontentMapper.selectList(wrapper);
+        List<Integer> noteIdList=contentList.stream().map(layercontent::getNoteid).distinct().toList();
+        return noteIdList;
+    }
+
+
+    @Override
+    public List<Integer> searchByKeyWord(String keyword, String userId) {
+        //存浏览纪录
+        searchHistory searchhistory=new searchHistory();
+        searchhistory.setId(null);
+        searchhistory.setKeyword(keyword);
+        searchhistory.setUrl("/search/searchByKeyWord/"+keyword);
+        searchhistory.setUserid(userId);
+        searchhistory.setTime(currentTime.getCurrentTime());
+        searchHistoryMapper.insert(searchhistory);
+
+        List<Integer> noteIdList1=searchByTitle(keyword,userId);
+        List<Integer> noteIdList2=searchByContent(keyword,userId);
+        noteIdList1.addAll(noteIdList2);
+
+        return noteIdList1;
     }
 }

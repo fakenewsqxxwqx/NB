@@ -12,10 +12,6 @@ import com.example._weizhinote_.mapper.usrMapper;
 import com.example._weizhinote_.mapper.noteMapper;
 import com.example._weizhinote_.utils.passwordEncoder;
 import com.example._weizhinote_.utils.currentTime;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 @Service
 public class usrServiceImpl implements usrService {
@@ -27,6 +23,7 @@ public class usrServiceImpl implements usrService {
     @Autowired
     private loginlogMapper loginlogMapper;
 
+    @Override
     public usr getUsrById(String id) {
         //计算用户笔记数
         QueryWrapper<note> wrapper= new QueryWrapper<>();
@@ -45,6 +42,7 @@ public class usrServiceImpl implements usrService {
         return usr;
     }
 
+    @Override
     public String register(usr usr) {
         QueryWrapper<usr> wrapper= new QueryWrapper<>();
         wrapper.eq("username", usr.getUsername());
@@ -60,7 +58,7 @@ public class usrServiceImpl implements usrService {
         }
     }
 
-
+    @Override
     public String login(String username, String password){
         QueryWrapper<usr> wrapper= new QueryWrapper<>();
         wrapper.eq("username", username);
@@ -80,7 +78,7 @@ public class usrServiceImpl implements usrService {
             return "密码错误";
         }
     }
-
+    @Override
     public void update(usr usr) {
         QueryWrapper<usr> wrapper= new QueryWrapper<>();
         wrapper.eq("id", usr.getId());

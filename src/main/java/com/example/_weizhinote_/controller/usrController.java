@@ -1,7 +1,7 @@
 package com.example._weizhinote_.controller;
 
 import com.example._weizhinote_.entity.usr;
-import com.example._weizhinote_.service.impl.usrServiceImpl;
+import com.example._weizhinote_.service.usrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/usr")
 public class usrController {
     @Autowired
-    private usrServiceImpl usrService;
+    private usrService usrService;
 
     @GetMapping("/loginById/{id}")
     public usr getUsr(@PathVariable String id){

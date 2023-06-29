@@ -5,9 +5,6 @@ import com.example._weizhinote_.entity.searchHistory;
 import com.example._weizhinote_.service.searchHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,9 +35,9 @@ public class searchController {
     public List<Integer> searchByTag(@PathVariable String tagname,@PathVariable String userId){
         return searchService.searchByTag(tagname,userId);
     }
-    /*
-    @GetMapping("/searchByTitle/{userId}/{title}")
 
-
-     */
+    @GetMapping("/searchByKeyWord/{userId}/{keyword}")
+    public List<Integer> searchByKeyWord(@PathVariable String keyword,@PathVariable String userId){
+        return searchService.searchByKeyWord(keyword,userId);
+    }
 }

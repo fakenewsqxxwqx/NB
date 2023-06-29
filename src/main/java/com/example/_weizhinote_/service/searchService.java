@@ -4,4 +4,6 @@ import java.util.List;
 
 public interface searchService {
     List<Integer> searchByTag(String tagname,String userId);
+
+    List<Integer> searchByKeyWord(String keyword, String userId);
 }
