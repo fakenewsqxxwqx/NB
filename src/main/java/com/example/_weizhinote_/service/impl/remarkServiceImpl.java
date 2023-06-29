@@ -5,6 +5,7 @@ import com.example._weizhinote_.entity.note;
 import com.example._weizhinote_.entity.remark;
 import com.example._weizhinote_.entity.usr;
 import com.example._weizhinote_.service.remarkService;
+import com.example._weizhinote_.utils.currentTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example._weizhinote_.mapper.remarkMapper;
@@ -26,6 +27,7 @@ public class remarkServiceImpl implements remarkService {
     public void addRemark(remark remark1) {
         remark1.setId(null);
         remark1.setFavornum(0);
+        remark1.setTime(currentTime.getCurrentTime());
         remarkMapper.insert(remark1);
     }
 
@@ -40,6 +42,7 @@ public class remarkServiceImpl implements remarkService {
         {
             remark1.setFavornum(remark1.getFavornum()-1);
         }
+        remark1.setTime(currentTime.getCurrentTime());
         remarkMapper.updateById(remark1);
     }
 

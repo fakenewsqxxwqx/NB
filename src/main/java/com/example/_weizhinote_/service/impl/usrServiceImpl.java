@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example._weizhinote_.mapper.usrMapper;
 import com.example._weizhinote_.mapper.noteMapper;
-
+import com.example._weizhinote_.utils.passwordEncoder;
+import com.example._weizhinote_.utils.currentTime;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -38,10 +39,7 @@ public class usrServiceImpl implements usrService {
         //纪录登录日志
         loginlog loginlog=new loginlog();
         loginlog.setUserid(usr.getId());
-        LocalDateTime localDateTime = LocalDateTime.now();
-        Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
-        Date date = Date.from(instant);
-        loginlog.setTime(date);
+        loginlog.setTime(currentTime.getCurrentTime());
         loginlogMapper.insert(loginlog);
 
         return usr;
@@ -52,6 +50,8 @@ public class usrServiceImpl implements usrService {
         wrapper.eq("username", usr.getUsername());
         usr usr1=usrMapper.selectOne(wrapper);
         if (usr1==null){
+            usr.setPassw(passwordEncoder.encode(usr.getPassw()));
+            usr.setTime(currentTime.getCurrentTime());
             usrMapper.insert(usr);
             return "注册成功";
         }
@@ -60,23 +60,20 @@ public class usrServiceImpl implements usrService {
         }
     }
 
-    public String login(String username, String password) {
+
+    public String login(String username, String password){
         QueryWrapper<usr> wrapper= new QueryWrapper<>();
         wrapper.eq("username", username);
         usr usr=usrMapper.selectOne(wrapper);
-        if (usr==null){
+        if(usr==null){
             return "用户不存在";
         }
-        else if (usr.getPassw().equals(password)){
+        else if(passwordEncoder.matches(password, usr.getPassw())){
             //登录成功，记录登录日志
             loginlog loginlog=new loginlog();
             loginlog.setUserid(usr.getId());
-            LocalDateTime localDateTime = LocalDateTime.now();
-            Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
-            Date date = Date.from(instant);
-            loginlog.setTime(date);
+            loginlog.setTime(currentTime.getCurrentTime());
             loginlogMapper.insert(loginlog);
-
             return "登录成功";
         }
         else {
@@ -85,9 +82,10 @@ public class usrServiceImpl implements usrService {
     }
 
     public void update(usr usr) {
-        System.out.println("updateService");
         QueryWrapper<usr> wrapper= new QueryWrapper<>();
         wrapper.eq("id", usr.getId());
+        usr.setPassw(passwordEncoder.encode(usr.getPassw()));
+        usr.setTime(currentTime.getCurrentTime());
         usrMapper.update(usr, wrapper);
     }
 }

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.example._weizhinote_.mapper.remarkMapper;
 import com.example._weizhinote_.mapper.starMapper;
+import com.example._weizhinote_.utils.currentTime;
 @Service
 public class noteServiceImpl implements noteService {
     @Autowired
@@ -41,6 +42,7 @@ public class noteServiceImpl implements noteService {
     @Override
     public void addNote(note note1){
         note1.setId(null);
+        note1.setTime(currentTime.getCurrentTime());
         noteMapper.insert(note1);
     }
 
@@ -49,6 +51,7 @@ public class noteServiceImpl implements noteService {
         for (tag tag1:list1)
         {
             tag1.setId(null);
+            tag1.setTime(currentTime.getCurrentTime());
             tagMapper.insert(tag1);
         }
     }
@@ -58,6 +61,7 @@ public class noteServiceImpl implements noteService {
         for (picture picture1:list2)
         {
             picture1.setId(null);
+            picture1.setTime(currentTime.getCurrentTime());
             pictureMapper.insert(picture1);
         }
     }
@@ -67,6 +71,7 @@ public class noteServiceImpl implements noteService {
         for (layercontent layercontent1:list3)
         {
             layercontent1.setId(null);
+            layercontent1.setTime(currentTime.getCurrentTime());
             layercontentMapper.insert(layercontent1);
         }
     }
@@ -78,6 +83,7 @@ public class noteServiceImpl implements noteService {
         note note2 = noteMapper.selectOne(queryWrapper);
         if(note2!=null)
         {
+            note2.setTime(currentTime.getCurrentTime());
             noteMapper.updateById(note1);
         }
     }
@@ -92,6 +98,7 @@ public class noteServiceImpl implements noteService {
             tag tag2 = tagMapper.selectOne(queryWrapper);
             if(tag2!=null)
             {
+                tag2.setTime(currentTime.getCurrentTime());
                 tagMapper.updateById(tag1);
             }
         }
@@ -107,6 +114,7 @@ public class noteServiceImpl implements noteService {
             picture picture2 = pictureMapper.selectOne(queryWrapper);
             if(picture2!=null)
             {
+                picture2.setTime(currentTime.getCurrentTime());
                 pictureMapper.updateById(picture1);
             }
         }
@@ -122,6 +130,7 @@ public class noteServiceImpl implements noteService {
             layercontent layercontent2 = layercontentMapper.selectOne(queryWrapper);
             if(layercontent2!=null)
             {
+                layercontent2.setTime(currentTime.getCurrentTime());
                 layercontentMapper.updateById(layercontent1);
             }
         }

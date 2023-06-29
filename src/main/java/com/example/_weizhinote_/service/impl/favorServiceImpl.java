@@ -1,5 +1,5 @@
 package com.example._weizhinote_.service.impl;
-
+import com.example._weizhinote_.utils.currentTime;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example._weizhinote_.entity.favor;
 import com.example._weizhinote_.service.favorService;
@@ -32,6 +32,7 @@ public class favorServiceImpl implements favorService {
     public void addFavor(favor favor1)
     {
        favor1.setId(null);
+       favor1.setTime(currentTime.getCurrentTime());
        favorMapper.insert(favor1);
     }
 

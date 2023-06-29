@@ -14,6 +14,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import com.example._weizhinote_.mapper.tagMapper;
+import com.example._weizhinote_.utils.currentTime;
 
 @Service
 public class searchServiceImpl implements searchService {
@@ -33,10 +34,7 @@ public class searchServiceImpl implements searchService {
         searchhistory.setUrl("/search/searchByTag/"+tagname);
         searchhistory.setUserid(userId);
 
-        LocalDateTime localDateTime = LocalDateTime.now();
-        Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
-        Date date = Date.from(instant);
-        searchhistory.setTime(date);
+        searchhistory.setTime(currentTime.getCurrentTime());
         searchHistoryMapper.insert(searchhistory);
 
         //查找tag

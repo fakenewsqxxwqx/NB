@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example._weizhinote_.entity.note;
 import com.example._weizhinote_.entity.star;
 import com.example._weizhinote_.service.starService;
+import com.example._weizhinote_.utils.currentTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example._weizhinote_.mapper.starMapper;
@@ -40,6 +41,7 @@ public class starServiceImpl implements starService {
     public void addStar(star star1)
     {
        star1.setId(null);
+       star1.setTime(currentTime.getCurrentTime());
        starMapper.insert(star1);
     }
 
