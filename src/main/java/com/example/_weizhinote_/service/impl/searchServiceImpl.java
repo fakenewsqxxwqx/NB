@@ -9,6 +9,8 @@ import com.example._weizhinote_.mapper.searchHistoryMapper;
 import com.example._weizhinote_.service.searchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import com.example._weizhinote_.mapper.tagMapper;
 import com.example._weizhinote_.utils.currentTime;
@@ -84,16 +86,15 @@ public class searchServiceImpl implements searchService {
 
         List<Integer> noteIdList1 = searchByTitle(keyword, userId);
         List<Integer> noteIdList2 = searchByContent(keyword, userId);
-        if (noteIdList1 == null) {
-            System.out.println("noteIdList1为空");
-        }
-        if (noteIdList2 == null) {
-            System.out.println("noteIdList1为空");
-        }
+
         //合并相同笔记id
-        for (int i = 0; i < noteIdList2.size(); i++) {
-            if (!noteIdList1.contains(noteIdList2.get(i))) {
-                noteIdList1.add(noteIdList2.get(i));
+        if (noteIdList1.size()==0) {
+            noteIdList1 = new ArrayList<>(noteIdList2);
+        } else {
+            for (int i = 0; i < noteIdList2.size(); i++) {
+                if (!noteIdList1.contains(noteIdList2.get(i))) {
+                    noteIdList1.add(noteIdList2.get(i));
+                }
             }
         }
         return noteIdList1;
