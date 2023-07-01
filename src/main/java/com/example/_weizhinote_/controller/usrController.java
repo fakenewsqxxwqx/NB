@@ -11,9 +11,15 @@ public class usrController {
     @Autowired
     private usrService usrService;
 
-    @GetMapping("/loginById/{id}")
-    public usr getUsr(@PathVariable String id){
+    @GetMapping("/getUsrById/{id}")
+    public usr getUsr(@PathVariable int id){
         return usrService.getUsrById(id);
+    }
+
+    //小程序端登录
+    @GetMapping("/loginByWeichatId/{weichatid}")
+    public usr getUsrByWeichatId(@PathVariable String weichatid){
+        return usrService.getUsrByWeichatId(weichatid);
     }
 
     @PostMapping("/register")
@@ -29,5 +35,10 @@ public class usrController {
     @PutMapping("/update")
     public void update(@RequestBody usr usr){
         usrService.update(usr);
+    }
+
+    @PutMapping("/addVisitNum/{id}")
+    public void addVisitNum(@PathVariable int id){
+        usrService.addVisitNum(id);
     }
 }

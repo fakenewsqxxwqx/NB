@@ -5,7 +5,7 @@ import com.example._weizhinote_.entity.searchHistory;
 import java.util.List;
 
 public interface searchHistoryService {
-    List<searchHistory> getSearchHistoryByUserId(String userId);
+    List<searchHistory> getSearchHistoryByUserId(int userId);
 
     void deleteSearchHistoryById(int id);
 }

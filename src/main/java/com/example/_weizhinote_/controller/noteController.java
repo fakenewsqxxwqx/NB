@@ -21,12 +21,12 @@ public class noteController {
 
     //读取
     @GetMapping("/getNoteByUserId/{id}")
-    public List<note> getNoteByUserId(@PathVariable String id){
+    public List<note> getNoteByUserId(@PathVariable int id){
         return noteService.getNoteByUserId(id);
     }
 
     @GetMapping("/getNoteIdByUserId/{id}")
-    public List<Integer> getNoteIdByUserId(@PathVariable String id){
+    public List<Integer> getNoteIdByUserId(@PathVariable int id){
         return noteService.getNoteIdByUserId(id);
     }
 
@@ -45,18 +45,8 @@ public class noteController {
         return noteService.getLayercontentByNoteId(id);
     }
 
-    @GetMapping("/getFavorNum/{id}")
-    public long getFavorNum(@PathVariable int id){
-        return favorService.favorNum(id);
-    }
-
-    @GetMapping("/getStarNum/{id}")
-    public long getStarNum(@PathVariable int id){
-        return starService.starNum(id);
-    }
-
     @GetMapping("/getUsrByUserId/{id}")
-    public usr getUsrByUserId(@PathVariable String id){
+    public usr getUsrByUserId(@PathVariable int id){
         return noteService.getUsrByUserId(id);
     }
 

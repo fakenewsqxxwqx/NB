@@ -9,9 +9,13 @@ public interface remarkService {
     
     void addRemark(com.example._weizhinote_.entity.remark remark1);
 
-    void updateRemark(int id, int flag);
-
     List<remark> getRemarkByNoteId(int id);
 
     usr getUserByRemarkId(int id);
+
+    long getRemarkNum(int id);
+
+    void updateRemarkFavor(int userid, int remarkid);
+
+    long getRemarkFavorNum(int id);
 }

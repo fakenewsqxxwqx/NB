@@ -19,7 +19,7 @@ public interface starService {
     long starNum(int noteId);
 
     //用户收藏列表
-    List<note> getStarList(String userId);
+    List<note> getStarList(int userId);
 
     //用户收藏列表
 }

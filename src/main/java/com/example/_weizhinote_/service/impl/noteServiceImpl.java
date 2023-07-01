@@ -43,9 +43,6 @@ public class noteServiceImpl implements noteService {
     public void addNote(note note1){
         note1.setId(null);
         note1.setTime(currentTime.getCurrentTime());
-        note1.setStarnum(0);
-        note1.setFavornum(0);
-        note1.setRemarknum(0);
         noteMapper.insert(note1);
     }
 
@@ -169,7 +166,7 @@ public class noteServiceImpl implements noteService {
     用户笔记界面获取各种信息
      */
     @Override
-    public List<note> getNoteByUserId(String userId) {
+    public List<note> getNoteByUserId(int userId) {
         QueryWrapper<note> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userid",userId);
         return noteMapper.selectList(queryWrapper);
@@ -197,7 +194,7 @@ public class noteServiceImpl implements noteService {
     }
 
     @Override
-    public usr getUsrByUserId(String userId) {
+    public usr getUsrByUserId(int userId) {
         QueryWrapper<usr> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id",userId);
         return usrMapper.selectOne(queryWrapper);
@@ -270,26 +267,11 @@ public class noteServiceImpl implements noteService {
         QueryWrapper<note> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id",id);
         note note1 = noteMapper.selectOne(queryWrapper);
-        //查询点赞数
-        QueryWrapper<favor> queryWrapper1 = new QueryWrapper<>();
-        queryWrapper1.eq("noteid",id);
-        long favorNum = favorMapper.selectCount(queryWrapper1);
-        note1.setFavornum(favorNum);
-        //查询评论数
-        QueryWrapper<remark> queryWrapper2 = new QueryWrapper<>();
-        queryWrapper2.eq("noteid",id);
-        long remarkNum = remarkMapper.selectCount(queryWrapper2);
-        note1.setRemarknum(remarkNum);
-        //查询收藏数
-        QueryWrapper<star> queryWrapper3 = new QueryWrapper<>();
-        queryWrapper3.eq("noteid",id);
-        long starNum = starMapper.selectCount(queryWrapper3);
-        note1.setStarnum(starNum);
         return note1;
     }
 
     @Override
-    public List<Integer> getNoteIdByUserId(String id) {
+    public List<Integer> getNoteIdByUserId(int id) {
         QueryWrapper<note> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userid",id);
         List<note> list = noteMapper.selectList(queryWrapper);

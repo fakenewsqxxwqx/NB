@@ -11,6 +11,6 @@ public class star {
     @TableId(type = IdType.AUTO)
     private Integer id;
     private int noteid;
-    private String userid;
+    private Integer userid;
     private Date time;
 }

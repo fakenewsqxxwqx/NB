@@ -21,7 +21,7 @@ public class searchController {
     private searchService searchService;
 
     @GetMapping("/getSearchHistoryByUserId/{id}")
-    public List<searchHistory> getSearchHistoryByUserId(@PathVariable("id") String id) {
+    public List<searchHistory> getSearchHistoryByUserId(@PathVariable("id") int id) {
         return searchHistoryService.getSearchHistoryByUserId(id);
     }
 
@@ -32,12 +32,12 @@ public class searchController {
 
 
     @GetMapping("/searchByTag/{userId}/{tagname}")
-    public List<Integer> searchByTag(@PathVariable String tagname,@PathVariable String userId){
+    public List<Integer> searchByTag(@PathVariable String tagname,@PathVariable int userId){
         return searchService.searchByTag(tagname,userId);
     }
 
     @GetMapping("/searchByKeyWord/{userId}/{keyword}")
-    public List<Integer> searchByKeyWord(@PathVariable String keyword,@PathVariable String userId){
+    public List<Integer> searchByKeyWord(@PathVariable String keyword,@PathVariable int userId){
         return searchService.searchByKeyWord(keyword,userId);
     }
 }

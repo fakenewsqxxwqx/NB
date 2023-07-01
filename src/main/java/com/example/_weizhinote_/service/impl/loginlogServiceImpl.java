@@ -20,7 +20,7 @@ public class loginlogServiceImpl implements loginlogService {
     }
 
     @Override
-    public List<loginlog> getLoginLogByUserId(String id) {
+    public List<loginlog> getLoginLogByUserId(int id) {
         QueryWrapper<loginlog> wrapper= new QueryWrapper<>();
         wrapper.eq("userid", id);
         return loginlogMapper.selectList(wrapper);

@@ -21,7 +21,7 @@ public class loginlogController {
     }
 
     @GetMapping("/getLoginLogByUserId/{id}")
-    public List<loginlog> getLoginLogByUserId(@PathVariable String id){
+    public List<loginlog> getLoginLogByUserId(@PathVariable int id){
         return loginlogService.getLoginLogByUserId(id);
     }
 }

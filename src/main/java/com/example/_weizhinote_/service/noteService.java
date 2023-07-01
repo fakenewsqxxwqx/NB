@@ -32,7 +32,7 @@ public interface noteService {
 
 
     //read
-    List<note> getNoteByUserId(String userId);
+    List<note> getNoteByUserId(int userId);
 
     List<tag> getTagByNoteId(int noteId);
 
@@ -40,7 +40,7 @@ public interface noteService {
 
     List<layercontent> getLayercontentByNoteId(int noteId);
 
-    usr getUsrByUserId(String userId);
+    usr getUsrByUserId(int userId);
 
     //删除功能
     void deleteNoteById(int noteId);
@@ -57,5 +57,5 @@ public interface noteService {
     //community
     note getCommunityNote(@PathVariable int id);
 
-    List<Integer> getNoteIdByUserId(String id);
+    List<Integer> getNoteIdByUserId(int id);
 }

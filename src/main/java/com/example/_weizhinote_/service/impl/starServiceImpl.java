@@ -81,7 +81,7 @@ public class starServiceImpl implements starService {
 
     //用户收藏列表
     @Override
-    public List<note> getStarList(String userId)
+    public List<note> getStarList(int userId)
     {
         QueryWrapper<star> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userid",userId);

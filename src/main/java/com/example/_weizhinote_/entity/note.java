@@ -11,11 +11,8 @@ public class note {
     @TableId(type = IdType.AUTO)
     private Integer id;
     private String notetitle;
-    private String userid;
+    private Integer userid;
     private Date time;
     private String type;
-    private long starnum;
-    private long favornum;
-    private long remarknum;
     private byte permission;
 }

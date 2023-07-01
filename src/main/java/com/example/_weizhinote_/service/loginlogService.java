@@ -7,5 +7,5 @@ import java.util.List;
 public interface loginlogService {
     List<loginlog> getLoginLog();
 
-    List<loginlog> getLoginLogByUserId(String id);
+    List<loginlog> getLoginLogByUserId(int id);
 }

@@ -32,7 +32,7 @@ public class searchServiceImpl implements searchService {
     private layercontentMapper layercontentMapper;
 
     @Override
-    public List<Integer> searchByTag(String tagname,String userId) {
+    public List<Integer> searchByTag(String tagname,int userId) {
         //存浏览纪录
         searchHistory searchhistory=new searchHistory();
         searchhistory.setId(null);
@@ -55,7 +55,7 @@ public class searchServiceImpl implements searchService {
     }
 
     //根据标题模糊查询
-    public List<Integer> searchByTitle(String keyword,String userId) {
+    public List<Integer> searchByTitle(String keyword,int userId) {
         QueryWrapper<note> wrapper= new QueryWrapper<>();
         wrapper.like("notetitle", keyword);
         List<note> noteList=noteMapper.selectList(wrapper);
@@ -64,7 +64,7 @@ public class searchServiceImpl implements searchService {
     }
 
     //根据内容模糊查询
-    public List<Integer> searchByContent(String keyword,String userId) {
+    public List<Integer> searchByContent(String keyword,int userId) {
         QueryWrapper<layercontent> wrapper= new QueryWrapper<>();
         wrapper.like("content", keyword);
         List<layercontent> contentList=layercontentMapper.selectList(wrapper);
@@ -74,7 +74,7 @@ public class searchServiceImpl implements searchService {
 
 
     @Override
-    public List<Integer> searchByKeyWord(String keyword, String userId) {
+    public List<Integer> searchByKeyWord(String keyword, int userId) {
         //存浏览纪录
         searchHistory searchhistory = new searchHistory();
         searchhistory.setId(null);

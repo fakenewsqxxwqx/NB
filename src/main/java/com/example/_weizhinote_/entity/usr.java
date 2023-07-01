@@ -6,10 +6,10 @@ import java.util.Date;
 
 @Data
 public class usr {
-    private String id;
+    private Integer id;
+    private String wechatid;
     private String username;
     private String passw;
-    private long notenum;
     private long visitnum;
     private String role;
     private Date time;

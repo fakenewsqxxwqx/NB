@@ -2,14 +2,12 @@ package com.example._weizhinote_.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example._weizhinote_.entity.loginlog;
-import com.example._weizhinote_.entity.note;
 import com.example._weizhinote_.entity.usr;
 import com.example._weizhinote_.mapper.loginlogMapper;
 import com.example._weizhinote_.service.usrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example._weizhinote_.mapper.usrMapper;
-import com.example._weizhinote_.mapper.noteMapper;
 import com.example._weizhinote_.utils.passwordEncoder;
 import com.example._weizhinote_.utils.currentTime;
 
@@ -17,30 +15,27 @@ import com.example._weizhinote_.utils.currentTime;
 public class usrServiceImpl implements usrService {
 
     @Autowired
-    private noteMapper noteMapper;
-    @Autowired
     private usrMapper usrMapper;
     @Autowired
     private loginlogMapper loginlogMapper;
 
-    @Override
-    public usr getUsrById(String id) {
-        //计算用户笔记数
-        QueryWrapper<note> wrapper= new QueryWrapper<>();
-        wrapper.eq("id", id);
-        long noteNum=noteMapper.selectCount(wrapper);
-
-        usr usr=usrMapper.selectById(id);
-        usr.setNotenum(noteNum);
-
+    private void loginLogInsert(usr usr){
         //纪录登录日志
         loginlog loginlog=new loginlog();
         loginlog.setUserid(usr.getId());
         loginlog.setTime(currentTime.getCurrentTime());
         loginlogMapper.insert(loginlog);
 
+    }
+
+    @Override
+    public usr getUsrById(int id) {
+
+        usr usr=usrMapper.selectById(id);
         return usr;
     }
+
+
 
     @Override
     public String register(usr usr) {
@@ -49,11 +44,11 @@ public class usrServiceImpl implements usrService {
         usr usr1=usrMapper.selectOne(wrapper);
         if (usr1==null){
             usr.setPassw(passwordEncoder.encode(usr.getPassw()));
-            usr.setNotenum(0);
             usr.setVisitnum(0);
             if(usr.getRole()==null) usr.setRole("user");
             usr.setTime(currentTime.getCurrentTime());
             usrMapper.insert(usr);
+            loginLogInsert(usr);
             return "注册成功";
         }
         else {
@@ -70,11 +65,7 @@ public class usrServiceImpl implements usrService {
             return "用户不存在";
         }
         else if(passwordEncoder.matches(password, usr.getPassw())){
-            //登录成功，记录登录日志
-            loginlog loginlog=new loginlog();
-            loginlog.setUserid(usr.getId());
-            loginlog.setTime(currentTime.getCurrentTime());
-            loginlogMapper.insert(loginlog);
+            loginLogInsert(usr);
             return "登录成功";
         }
         else {
@@ -88,6 +79,22 @@ public class usrServiceImpl implements usrService {
         usr.setPassw(passwordEncoder.encode(usr.getPassw()));
         usr.setTime(currentTime.getCurrentTime());
         usrMapper.update(usr, wrapper);
+    }
+
+    @Override
+    public usr getUsrByWeichatId(String weichatid) {
+        QueryWrapper<usr> wrapper= new QueryWrapper<>();
+        wrapper.eq("weichatid", weichatid);
+        usr usr=usrMapper.selectOne(wrapper);
+        loginLogInsert(usr);
+        return usr;
+    }
+
+    @Override
+    public void addVisitNum(int id) {
+        usr usr=usrMapper.selectById(id);
+        usr.setVisitnum(usr.getVisitnum()+1);
+        usrMapper.updateById(usr);
     }
 
 }

@@ -1,7 +1,9 @@
 package com.example._weizhinote_.service;
 
+import com.example._weizhinote_.entity.usr;
+
 public interface usrService {
-    com.example._weizhinote_.entity.usr getUsrById(String id);
+    com.example._weizhinote_.entity.usr getUsrById(int id);
 
     String register(com.example._weizhinote_.entity.usr usr);
 
@@ -9,4 +11,7 @@ public interface usrService {
 
     void update(com.example._weizhinote_.entity.usr usr);
 
+    usr getUsrByWeichatId(String weichatid);
+
+    void addVisitNum(int id);
 }

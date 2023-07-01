@@ -10,6 +10,6 @@ import java.util.Date;
 public class loginlog {
     @TableId(type = IdType.AUTO)
     private Integer id;
-    private String userid;
+    private Integer userid;
     private Date time;
 }

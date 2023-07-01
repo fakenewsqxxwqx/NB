@@ -11,8 +11,7 @@ public class remark {
     @TableId(type = IdType.AUTO)
     private Integer id;
     private int noteid;
-    private String userid;
+    private Integer userid;
     private String remarkcontent;
     private Date time;
-    private long favornum;
 }

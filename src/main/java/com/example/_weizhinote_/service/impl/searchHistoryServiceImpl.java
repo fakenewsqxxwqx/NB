@@ -15,7 +15,7 @@ public class searchHistoryServiceImpl implements searchHistoryService {
     private searchHistoryMapper searchHistoryMapper;
 
     @Override
-    public List<searchHistory> getSearchHistoryByUserId(String userId) {
+    public List<searchHistory> getSearchHistoryByUserId(int userId) {
         QueryWrapper<searchHistory> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userid", userId);
         return searchHistoryMapper.selectList(queryWrapper);

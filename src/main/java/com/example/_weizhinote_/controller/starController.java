@@ -33,7 +33,7 @@ public class starController {
 
     //收藏列表，需要获取笔记的整个内容以及点赞，收藏，评论数
     @GetMapping("/starList/{id}")
-    public List<note> getStarList(@PathVariable String id){
+    public List<note> getStarList(@PathVariable int id){
         return starService.getStarList(id);
     }
 
@@ -58,8 +58,4 @@ public class starController {
         return starService.starNum(id);
     }
 
-    @GetMapping("/starList/favorNum/{id}")
-    public long getFavorNum(@PathVariable int id){
-        return favorService.favorNum(id);
-    }
 }
