@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api")
 public class verifyCodeController {
@@ -34,7 +36,9 @@ public class verifyCodeController {
 
     //校验验证码
     @GetMapping("/verify")
-    public String verify(@RequestParam("code") String code, HttpSession session){
+    public String verify(@RequestBody Map<String, String> requestBody, HttpSession session){
+        String code=requestBody.get("code");
+
         if (!StringUtils.hasLength(code)){
             return "验证码不能为空";
         }
