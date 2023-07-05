@@ -54,8 +54,8 @@ public class noteController {
 
  //添加
     @PostMapping("/addNote")
-    public void addNote(@RequestBody note note1){
-        noteService.addNote(note1);
+    public int addNote(@RequestBody note note1){
+        return noteService.addNote(note1);
     }
 
     @PostMapping("/addTag")

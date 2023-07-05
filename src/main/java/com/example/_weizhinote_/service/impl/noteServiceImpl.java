@@ -40,10 +40,17 @@ public class noteServiceImpl implements noteService {
      */
 
     @Override
-    public void addNote(note note1){
+    public int addNote(note note1){
         note1.setId(null);
         note1.setTime(currentTime.getCurrentTime());
         noteMapper.insert(note1);
+
+        //返回此时插入的笔记的id
+        QueryWrapper<note> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("time",note1.getTime());
+        note note2 = noteMapper.selectOne(queryWrapper);
+        int id = note2.getId();
+        return id;
     }
 
     @Override

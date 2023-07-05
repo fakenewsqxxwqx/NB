@@ -9,7 +9,7 @@ public interface noteService {
     /*
     用户笔记界面管理笔记
      */
-    void addNote(note note1);
+    int addNote(note note1);
 
     void addTag(List<tag> list1);
 
