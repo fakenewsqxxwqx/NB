@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example._weizhinote_.service.favorService;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/favor")
 public class favorController {
@@ -13,8 +15,7 @@ public class favorController {
 
     //点赞功能（自动判断是否点赞）
     @PutMapping("/favorControl")//update
-    public void favorControl(@RequestBody favor favor1)
-    {
+    public void favorControl(@RequestBody favor favor1) {
         favorService.favor(favor1);
     }
 

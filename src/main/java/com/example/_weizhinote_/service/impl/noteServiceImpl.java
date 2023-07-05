@@ -43,14 +43,15 @@ public class noteServiceImpl implements noteService {
     public int addNote(note note1){
         note1.setId(null);
         note1.setTime(currentTime.getCurrentTime());
+        System.out.println(note1);
         noteMapper.insert(note1);
 
-        //返回此时插入的笔记的id
+        //返回此时数据库中值最大的id
         QueryWrapper<note> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("time",note1.getTime());
+        //限制limit1
+        queryWrapper.orderByDesc("id").last("limit 1");
         note note2 = noteMapper.selectOne(queryWrapper);
-        int id = note2.getId();
-        return id;
+        return note2.getId();
     }
 
     @Override

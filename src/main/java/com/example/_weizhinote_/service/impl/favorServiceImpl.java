@@ -31,7 +31,6 @@ public class favorServiceImpl implements favorService {
     @Override
     public void addFavor(favor favor1)
     {
-       favor1.setId(null);
        favor1.setTime(currentTime.getCurrentTime());
        favorMapper.insert(favor1);
     }

@@ -88,16 +88,19 @@ public class searchServiceImpl implements searchService {
         List<Integer> noteIdList2 = searchByContent(keyword, userId);
 
         //合并相同笔记id
-        if (noteIdList1.size()==0) {
+        if (noteIdList1.size() == 0) {
             noteIdList1 = new ArrayList<>(noteIdList2);
         } else {
+            List<Integer> tempList = new ArrayList<>(noteIdList1); // 创建一个临时列表
             for (int i = 0; i < noteIdList2.size(); i++) {
-                if (!noteIdList1.contains(noteIdList2.get(i))) {
-                    noteIdList1.add(noteIdList2.get(i));
+                if (!tempList.contains(noteIdList2.get(i))) {
+                    tempList.add(noteIdList2.get(i));
                 }
             }
+            noteIdList1 = tempList; // 将修改后的列表赋值回noteIdList1
         }
         return noteIdList1;
+
     }
 
 
