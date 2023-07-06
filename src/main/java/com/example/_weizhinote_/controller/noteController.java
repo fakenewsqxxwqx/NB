@@ -46,6 +46,11 @@ public class noteController {
         return noteService.getUsrByUserId(id);
     }
 
+    @GetMapping("/getNoteByType/{type}")
+    public List<note> getNoteByType(@PathVariable String type){
+        return noteService.getNoteByType(type);
+    }
+
 
 
  //添加

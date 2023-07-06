@@ -291,6 +291,12 @@ public class noteServiceImpl implements noteService {
         return list1;
     }
 
-
+    @Override
+    public List<note> getNoteByType(String type) {
+        QueryWrapper<note> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("type",type);
+        List<note> list = noteMapper.selectList(queryWrapper);
+        return list;
+    }
 
 }

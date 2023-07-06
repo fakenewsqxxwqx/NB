@@ -58,4 +58,6 @@ public interface noteService {
     note getCommunityNote(@PathVariable int id);
 
     List<Integer> getNoteIdByUserId(int id);
+
+    List<note> getNoteByType(String type);
 }
