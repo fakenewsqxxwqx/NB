@@ -42,17 +42,17 @@ public class usrServiceImpl implements usrService {
         QueryWrapper<usr> wrapper= new QueryWrapper<>();
         wrapper.eq("username", usr.getUsername());
         usr usr1=usrMapper.selectOne(wrapper);
-        if (usr1==null){
-            usr.setPassw(passwordEncoder.encode(usr.getPassw()));
+        if (usr1!=null){
+            return "用户名已存在";
+        }
+        else {
+            //usr.setPassw(passwordEncoder.encode(usr.getPassw()));
             usr.setVisitnum(0);
             if(usr.getRole()==null) usr.setRole("user");
             usr.setTime(currentTime.getCurrentTime());
             usrMapper.insert(usr);
             loginLogInsert(usr);
             return "注册成功";
-        }
-        else {
-            return "用户名已存在";
         }
     }
 
@@ -64,7 +64,7 @@ public class usrServiceImpl implements usrService {
         if(usr==null){
             return "用户不存在";
         }
-        else if(passwordEncoder.matches(password, usr.getPassw())){
+        else if(/*passwordEncoder.matches(password, usr.getPassw())*/password.equals(usr.getPassw())){
             loginLogInsert(usr);
             return "登录成功";
         }
@@ -76,7 +76,7 @@ public class usrServiceImpl implements usrService {
     public void update(usr usr) {
         QueryWrapper<usr> wrapper= new QueryWrapper<>();
         wrapper.eq("id", usr.getId());
-        usr.setPassw(passwordEncoder.encode(usr.getPassw()));
+        //usr.setPassw(passwordEncoder.encode(usr.getPassw()));
         usr.setTime(currentTime.getCurrentTime());
         usrMapper.update(usr, wrapper);
     }

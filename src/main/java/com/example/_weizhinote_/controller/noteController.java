@@ -14,10 +14,6 @@ import java.util.List;
 public class noteController {
     @Autowired
     private noteService noteService;
-    @Autowired
-    private favorService favorService;
-    @Autowired
-    private starService starService;
 
     //读取
     @GetMapping("/getNoteByUserId/{id}")
