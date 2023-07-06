@@ -13,8 +13,8 @@ public class favorController {
     @Autowired
     private favorService favorService;
 
-    //点赞功能（自动判断是否点赞）
-    @PutMapping("/favorControl")//update
+    //点赞功能
+    @PutMapping("/favorControl")
     public void favorControl(@RequestBody favor favor1) {
         favorService.favor(favor1);
     }
