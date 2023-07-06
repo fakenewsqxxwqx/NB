@@ -14,4 +14,6 @@ public interface usrService {
     usr getUsrByWeichatId(String weichatid);
 
     void addVisitNum(int id);
+
+    usr getUsrByUserName(String username);
 }

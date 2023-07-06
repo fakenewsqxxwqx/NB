@@ -41,4 +41,9 @@ public class usrController {
     public void addVisitNum(@PathVariable int id){
         usrService.addVisitNum(id);
     }
+
+    @GetMapping("/getUsrByUserName/{username}")
+    public usr getUsrByUserName(@PathVariable String username){
+        return usrService.getUsrByUserName(username);
+    }
 }

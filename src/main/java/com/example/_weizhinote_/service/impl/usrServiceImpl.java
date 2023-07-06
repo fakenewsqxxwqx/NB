@@ -97,4 +97,12 @@ public class usrServiceImpl implements usrService {
         usrMapper.updateById(usr);
     }
 
+    @Override
+    public usr getUsrByUserName(String username){
+        QueryWrapper<usr> wrapper= new QueryWrapper<>();
+        wrapper.eq("username", username);
+        usr usr=usrMapper.selectOne(wrapper);
+        return usr;
+    }
+
 }
